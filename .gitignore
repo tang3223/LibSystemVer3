@@ -3,6 +3,7 @@
 .project
 .settings
 build/
+Users/
 
 # Windows image file caches
 Thumbs.db

@@ -53,6 +53,7 @@ public class BookDao extends BaseDao implements ResultSetExtractor<List<Book>>{
 		KeyHolder    bookID   = new GeneratedKeyHolder();
 		
 		template.update(new PreparedStatementCreator() {
+			@Override
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 				PreparedStatement ps = connection.prepareStatement(addBook);
 				ps.setObject(1, bookInfo[0]);

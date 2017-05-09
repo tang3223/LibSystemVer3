@@ -123,41 +123,38 @@ public class BorrowerService {
 		}
 		return null;
 	}
+	
+
+	public String parseListItems(List<?> items) {
+		if (items == null || items.isEmpty()) {
+			return "";
+		}
+		if (items.get(0).getClass() == Author.class) {
+			String authorName = "";
+			Author author = null;
+			for (int i = 0; i < items.size(); i++){
+				author = (Author) items.get(i);
+				authorName += author.getAuthorName();
+				if (i >= 0 && i < items.size()-1 && items.size()>1){
+					authorName += " | ";
+				}
+			}
+			return authorName;
+		}
+		if (items.get(0).getClass() == Genre.class){
+			String genreName = "";
+			for (int i = 0; i < items.size(); i++){
+				Genre genre = (Genre) items.get(i);
+				genreName += genre.getGenreName();
+				if (i >= 0 && i < items.size()-1 && items.size()>1){
+					genreName += " | ";
+				}
+			}
+			return genreName;
+		}
+		return null;
+	}
 }
-
-
-
-//public String parseListItems(List<?> items) {
-//if (items == null || items.isEmpty()) {
-//	return "";
-//}
-//if (items.get(0).getClass() == Author.class) {
-//	String authorName = "";
-//	Author author = null;
-//	for (int i = 0; i < items.size(); i++){
-//		author = (Author) items.get(i);
-//		authorName += author.getAuthorName();
-//		if (i >= 0 && i < items.size()-1 && items.size()>1){
-//			authorName += " | ";
-//		}
-//	}
-//	return authorName;
-//}
-//if (items.get(0).getClass() == Genre.class){
-//	String genreName = "";
-//	for (int i = 0; i < items.size(); i++){
-//		Genre genre = (Genre) items.get(i);
-//		genreName += genre.getGenreName();
-//		if (i >= 0 && i < items.size()-1 && items.size()>1){
-//			genreName += " | ";
-//		}
-//	}
-//	return genreName;
-//}
-//return null;
-//}
-
-
 
 //public boolean checkDupBook(Integer bookID, Integer branchID, Integer borrowerID) throws SQLException{
 //	Connection conn = null;

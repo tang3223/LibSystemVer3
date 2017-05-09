@@ -393,57 +393,51 @@ public class AdminService {
 		return null;
 	}
 	
+	public String parseListItems(List<?> items) {
+		if (items == null || items.isEmpty()) {
+			return "";
+		}
+		if (items.get(0).getClass() == Author.class) {
+			String authorName = "";
+			Author author = null;
+			for (int i = 0; i < items.size(); i++){
+				author = (Author) items.get(i);
+				authorName += author.getAuthorName();
+				if (i >= 0 && i < items.size()-1 && items.size()>1){
+					authorName += " | ";
+				}
+			}
+			return authorName;
+		}
+		if (items.get(0).getClass() == Genre.class){
+			String genreName = "";
+			for (int i = 0; i < items.size(); i++){
+				Genre genre = (Genre) items.get(i);
+				genreName += genre.getGenreName();
+				if (i >= 0 && i < items.size()-1 && items.size()>1){
+					genreName += " | ";
+				}
+			}
+			return genreName;
+		}
+	return null;
+	}
+	
+	public Integer countAuthors(){
+		try {
+			return authorDao.countAuthors();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }
 
 
-//public Integer countAuthors() throws SQLException{
-//Connection conn = null;
-//
-//try {
-//	conn = ConnectionUtil.getConnection();
-//	AuthorDao adao = new AuthorDao(conn);
-//	return adao.countAuthors();
-//} catch (ClassNotFoundException | SQLException e) {
-//	e.printStackTrace();
-//} finally{
-//	if(conn!=null){
-//		conn.close();
-//	}
-//}
-//return null;
-//}
 
 
 
-//public String parseListItems(List<?> items) {
-//	if (items == null || items.isEmpty()) {
-//		return "";
-//	}
-//	if (items.get(0).getClass() == Author.class) {
-//		String authorName = "";
-//		Author author = null;
-//		for (int i = 0; i < items.size(); i++){
-//			author = (Author) items.get(i);
-//			authorName += author.getAuthorName();
-//			if (i >= 0 && i < items.size()-1 && items.size()>1){
-//				authorName += " | ";
-//			}
-//		}
-//		return authorName;
-//	}
-//	if (items.get(0).getClass() == Genre.class){
-//		String genreName = "";
-//		for (int i = 0; i < items.size(); i++){
-//			Genre genre = (Genre) items.get(i);
-//			genreName += genre.getGenreName();
-//			if (i >= 0 && i < items.size()-1 && items.size()>1){
-//				genreName += " | ";
-//			}
-//		}
-//		return genreName;
-//	}
-//	return null;
-//}
 
 
 
